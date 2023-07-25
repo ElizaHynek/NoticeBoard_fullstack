@@ -21,6 +21,17 @@ exports.getById = async (req, res) => {
   }
 };
 
+exports.getSearched = async (req, res) => {
+  try {
+    const advert = await Ads.find({ searchPhrase: req.params.title });
+    if(!advert) res.status(404).json({ message: 'Not found' });
+    else res.json(advert);
+  }
+  catch(err) {
+    res.status(500).json({ message: err });
+  }
+};
+
 exports.postAll = async (req, res) => {
   try {
     const { title, content, publishDate, price, location, seller } = req.body;
