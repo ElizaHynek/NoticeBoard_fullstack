@@ -2,24 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 //const hbs = require('express-handlebars');
-//const passport = require('passport');
-//const session = require('express-session');
-//const passportConfig = require('./config/passport');
+const session = require('express-session');
 const mongoose = require('mongoose');
+//const MongoStore = require('connect-mongo');
 //const connectToDB = require('./db');
 
 const app = express();
-
-// set handlebars as view engine
-//app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 'main' }));
-//app.set('view engine', '.hbs');
-
-// init session mechanism
-//app.use(session({ secret: 'anything' }));
-
-// init passport
-//app.use(passport.initialize());
-//app.use(passport.session());
 
 //connectToDB();
 
@@ -28,7 +16,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(session({ secret: 'xyz567', resave: false, saveUninitialized: false }));
+
 app.use(express.static(path.join(__dirname, '/client/build')));
+
 
 app.use('/api', require('./routes/ads.routes'));
 app.use('/api', require('./routes/user.routes'));
