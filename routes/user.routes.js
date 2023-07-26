@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-
+// router.get('/auth/user', UserController.getAll);
+ /*
 const isLogged = (req, res, next) => {
   if (!req.isAuthenticated()) {
     res.redirect('/user/no-permission');
@@ -32,6 +33,6 @@ router.get('/profile/settings', isLogged, (req, res) => {
 router.get('/logout', (req, res) => {
   res.render('logout');
 });
+*/
 
-
-module.exports = router;
+module.exports = router; 
