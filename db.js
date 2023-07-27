@@ -1,13 +1,20 @@
-const dotenv = require("dotenv");
-dotenv.config();
-const mongodb = require("mongodb");
+const mongoose = require('mongoose');
 
-mongodb.connect(
-  process.env.CONNECTIONSTRING,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  (err, client) => {
-    module.exports = client;
-    const app = require("./app");
-    app.listen(process.env.PORT);
-  }
-);
+const connectToDB = () => {
+  // connect to DB
+  const NODE_ENV = process.env.NODE_ENV;
+  let dbUri = '';
+
+  if(NODE_ENV === 'production') dbUri = 'url to remote db';
+  else dbUri = 'mongodb://localhost:27017/adsDB';
+
+  mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+  const db = mongoose.connection;
+
+  db.once('open', () => {
+    console.log('Connected to the database');
+  });
+  db.on('error', (err) => console.log('Error ' + err));
+};
+
+module.exports = connectToDB;

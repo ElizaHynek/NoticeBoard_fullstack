@@ -5,19 +5,38 @@ const path = require('path');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
-//const connectToDB = require('./db');
+const connectToDB = require('./db');
+const passport = require('./config/passport');
 
 const app = express();
+app.use(session({ secret: 'anything' }));
 
-//connectToDB();
+
+connectToDB();
 
 // standard middleware
-app.use(cors());
+if(process.env.NODE_ENV !== 'production') {
+  app.use(
+    cors({
+      origin: ['http://localhost:3000'],
+      credentials: true,
+    })
+  );
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(session({ secret: 'xyz567', resave: false, saveUninitialized: false }));
-//store: MongoStore.create(mongoose.connection), 
+app.use(session
+  ({ 
+  secret: process.env.SECRET, 
+  store: MongoStore.create(mongoose.connection), 
+  resave: false, 
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV == 'production',
+  },
+}));
+
 
 app.use(express.static(path.join(__dirname, '/client/build')));
 
@@ -33,21 +52,6 @@ app.get('*', (req, res) => {
 app.use('/', (req, res) => {
   res.status(404).render('notFound');
 });
-
-const NODE_ENV = process.env.NODE_ENV;
-let dbUri = '';
-
-if(NODE_ENV === 'production') dbUri = 'url to remote db';
-else dbUri = 'mongodb://localhost:27017/adsDB';
-
-mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-
-
-db.once('open', () => {
-  console.log('Connected to the database');
-});
-db.on('error', err => console.log('Error ' + err));
 
 
 const server = app.listen('8000', () => {
