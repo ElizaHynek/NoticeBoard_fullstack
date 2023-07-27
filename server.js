@@ -4,7 +4,7 @@ const path = require('path');
 //const hbs = require('express-handlebars');
 const session = require('express-session');
 const mongoose = require('mongoose');
-//const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 //const connectToDB = require('./db');
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(session({ secret: 'xyz567', resave: false, saveUninitialized: false }));
+//store: MongoStore.create(mongoose.connection), 
 
 app.use(express.static(path.join(__dirname, '/client/build')));
 
