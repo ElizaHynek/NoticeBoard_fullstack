@@ -1,17 +1,29 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
+const getImageFileType = require('../utils/getImageFileType');
 
 exports.register = async (req, res) => {
 	try {	
 		
-		const { login, password, phoneNumber, avatar } = req.body;
-		if (login && typeof login === 'string' && password && typeof password === 'string') {
+		const { login, password, phoneNumber } = req.body;
+
+		// the more difficult solution is to use a function
+		const fileType = req.file ? await getImageFileType(req.file) : 'unknown';
+		if (login && typeof login === 'string' && password && typeof password === 'string' && req.file && ['image/png', 'image/jpeg', 'image/gif'].includes(fileType)) {
+
+		/* if (login && typeof login === 'string' && password && typeof password === 'string' && req.file ) {
+			 const [, ext] = req.file.originalname.split('.');
+			if (ext !== 'jpg' && ext !== 'png' && ext !== 'jpeg') {
+				return res.status(400).send({ message: 'File extension is not correct' });
+			} */ // this is a simple validation, if file has correct extension. 
+
+			//if (login && typeof login === 'string' && password && typeof password === 'string')
 			const userWithLogin = await User.findOne({ login });
 			if (userWithLogin) {
 				return res.status(409).send({ message: 'User with this login already exists'});
 			}
 
-			const user = await User.create({ login, password: await bcrypt.hash(password, 10), phoneNumber, avatar });
+			const user = await User.create({ login, password: await bcrypt.hash(password, 10), phoneNumber, avatar: req.file.filename });
 			res.status(201).send({ message: 'User created ' + user.login })
 		} else {
 			res.status(400).send({ message: 'Bad request' });

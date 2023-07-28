@@ -6,7 +6,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 const connectToDB = require('./db');
-const passport = require('./config/passport');
+//const passport = require('./config/passport');
 
 const app = express();
 app.use(session({ secret: 'anything' }));
@@ -39,7 +39,7 @@ app.use(session
 
 
 app.use(express.static(path.join(__dirname, '/client/build')));
-
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/api', require('./routes/ads.routes'));
 app.use('/api', require('./routes/user.routes'));
