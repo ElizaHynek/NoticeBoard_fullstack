@@ -24,9 +24,10 @@ exports.getById = async (req, res) => {
 };
 
 exports.getSearched = async (req, res) => {
+
   try {
-    const advert = await Ads.find({ searchPhrase: req.params.title });
-    if(!advert) res.status(404).json({ message: 'Not found' });
+    const advert = await Ads.find({ title: {$regex: req.params.searchPhrase, $options: 'i' }});
+    if (!advert) res.status(404).json({ message: 'Not found' });
     else res.json(advert);
   }
   catch(err) {
