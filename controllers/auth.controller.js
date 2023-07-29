@@ -9,7 +9,7 @@ exports.register = async (req, res) => {
 		const { login, password, phoneNumber } = req.body;
 
 		const fileType = req.file ? await getImageFileType(req.file) : 'unknown';
-		if (login && typeof login === 'string' && password && typeof password === 'string' && req.file && ['image/png', 'image/jpeg', 'image/gif'].includes(fileType)) {
+		if (login && typeof login === 'string' && password && typeof password === 'string' && req.file && ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'].includes(fileType)) {
 
 			const userWithLogin = await User.findOne({ login });
 			if (userWithLogin) {
