@@ -74,7 +74,7 @@ exports.edit = async (req, res) => {
     const advert = await Ads.findById(req.params.id);
 
     if(advert){
-      await Ads.updateOne({ _id: req.params.id }, { $set: { title: title, content: content, publishDate: publishDate, price: price, location: location, user: user, image: req.file }});
+      await Ads.updateOne({ _id: req.params.id }, { $set: { title: title, content: content, publishDate: publishDate, price: price, location: location, user: user, image: req.file.filename }});
       res.status(201).send({ message: 'Ad updated' });
     }
     else {
@@ -83,7 +83,7 @@ exports.edit = async (req, res) => {
     }
   catch(err) {
     if (req.file) {
-      fs.unlinkSync(`./client/public/uploads/${req.file.filename}`);
+      fs.unlinkSync(`./public/uploads/${req.file.filename}`);
     }
     res.status(500).json({ message: err.message });
   }
