@@ -3,7 +3,7 @@ import initialState from './initialState';
 import adsReducer from './adsRedux';
 
 const subreducers = {
-    ads: adsReducer,
+  ads: adsReducer,
 }
 
 const reducer = combineReducers(subreducers);

@@ -1,31 +1,31 @@
 import shortid from 'shortid';
 
 //selectors
-export const getAllPosts = ({ posts }) => posts;
-export const getPostById = ({ posts }, id) => posts.find(post => post.id === id);
+export const getAllAds = ({ ads }) => ads;
+export const getAdById = ({ ads }, id) => ads.find(ad => ad.id === id);
 
 // actions
-const createActionName = actionName => `app/posts/${actionName}`;
-const REMOVE_POST = createActionName('REMOVE_POST');
-const ADD_POST = createActionName('ADD_POST');
-const EDIT_POST = createActionName('EDIT_POST');
+const createActionName = actionName => `app/ads/${actionName}`;
+const REMOVE_AD = createActionName('REMOVE_AD');
+const ADD_AD = createActionName('ADD_AD');
+const EDIT_AD = createActionName('EDIT_AD');
 
 // action creators
-export const removePost = payload => ({ type: REMOVE_POST, payload });
-export const addPost = payload => ({ type: ADD_POST, payload });
-export const editPost = payload => ({ type: EDIT_POST, payload });
+export const removeAd = payload => ({ type: REMOVE_AD, payload });
+export const addAd = payload => ({ type: ADD_AD, payload });
+export const editAd = payload => ({ type: EDIT_AD, payload });
 
-const postsReducer = (statePart = [], action) => {
+const adsReducer = (statePart = [], action) => {
   switch (action.type) {
-    case REMOVE_POST:
-      return [...statePart.filter(post => post.id !== action.payload)];
-    case ADD_POST:
+    case REMOVE_AD:
+      return [...statePart.filter(ad => ad.id !== action.payload)];
+    case ADD_AD:
       return [...statePart, { ...action.payload, id: shortid() }];
-    case EDIT_POST:
-      return statePart.map(post => (post.id === action.payload.id ? { ...post, ...action.payload } : post));
+    case EDIT_AD:
+      return statePart.map(ad => (ad.id === action.payload.id ? { ...ad, ...action.payload } : ad));
     default:
       return statePart;
   };
 };
 
-export default postsReducer;
+export default adsReducer;
