@@ -18,7 +18,7 @@ const initialState = {
 			publishDate: '02-03-2022',
 			user: 'Martin Smith',
 			location: 'News',
-			image: 'about-us-1690791022499.jpg'
+			image: 'coffee-2-1690642819817.png'
 	  },
 		{
 			id: '3',
@@ -39,8 +39,24 @@ const initialState = {
 			publishDate: '02-03-2022',
 			user: 'Martin Smith',
 			location: 'News',
-			image: 'about-us-1690791022499.jpg'
+			image: 'coffee-2-1690642819817.png'
 			}
+		],
+	users: [
+		{
+			id: 1,
+			login: 'John Doe',
+			password: 'xxx',
+			avatar: "",
+			phoneNumber: '500500500'
+		},
+		{
+			id: 2,
+			login: 'Eliza H',
+			password: 'dupa',
+			avatar: "",
+			phoneNumber: '500500500'
+		}
 	]
   };
   

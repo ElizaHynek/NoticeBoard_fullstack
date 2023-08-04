@@ -10,7 +10,7 @@ import SearchResults from './components/pages/SearchResults';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Logout from './components/pages/Logout';
-import SingleAd from './components/pages/SingleAd';
+import SingleAd from './components/features/SingleAd';
 
 function App() {
   return (
