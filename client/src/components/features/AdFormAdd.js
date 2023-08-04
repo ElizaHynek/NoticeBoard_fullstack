@@ -15,7 +15,7 @@ const AdFormAdd = () => {
 
   return (
     <div>
-      <AdForm actionText="Add ad" action={handleAdd}/>
+      <AdForm actionText="Add new ad" action={handleAdd}/>
     </div>
     
   );

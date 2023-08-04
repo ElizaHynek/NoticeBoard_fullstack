@@ -7,10 +7,10 @@ import NotFound from './components/pages/NotFound';
 import AddAd from './components/pages/AddAd';
 import EditAd from './components/pages/EditAd';
 import SearchResults from './components/pages/SearchResults'; 
-import Ad from './components/pages/Ad';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Logout from './components/pages/Logout';
+import SingleAd from './components/pages/SingleAd';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/ads/:id" element={<Ad />} />
+          <Route path="/ads/:id" element={<SingleAd />} />
           <Route path="/ads/add" element={<AddAd />} />
           <Route path="/ads/edit/:id" element={<EditAd />} />
           <Route path="/ads/search/:searchPhrase" element={<SearchResults />} />

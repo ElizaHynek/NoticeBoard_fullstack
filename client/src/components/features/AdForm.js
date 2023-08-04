@@ -55,7 +55,7 @@ const AdForm = ({ action, actionText, ...props }) => {
           <ReactQuill as="textarea" value={content} onChange={setContent} />
           {contentError && <small className="d-block form-text text-danger mt-1">Content can't be empty</small>}
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="success" type="submit">
           {actionText}
         </Button>
       </Form>

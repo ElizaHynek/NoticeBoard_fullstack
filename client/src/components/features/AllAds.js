@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { getAllAds } from "../../redux/adsRedux";
 import { Row } from "react-bootstrap";
-import SingleAd from "../pages/SingleAd";
+import Ad from "../pages/Ad";
 
 
 const AllAds = () => {
@@ -10,7 +10,7 @@ const AllAds = () => {
 
 	return (
     <Row className="justify-content-between">
-        {ads.map(ad => <SingleAd key={ad.id} {...ad} />)}  
+        {ads.map(ad => <Ad key={ad.id} {...ad} />)}  
     </Row>  
 	);
 };
