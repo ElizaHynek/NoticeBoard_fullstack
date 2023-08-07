@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 
 const subreducers = {
   ads: adsReducer,
-  users: usersReducer
+  user: usersReducer
 }
 
 const reducer = combineReducers(subreducers);
