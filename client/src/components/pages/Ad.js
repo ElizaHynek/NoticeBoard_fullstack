@@ -13,7 +13,7 @@ const Ad = ({ title, location, image, id }) => {
           <Card.Text>
             <p><b>Location: </b>{location}</p>
           </Card.Text>
-          <Link key={id} to={"/ads/" + id}>
+          <Link key={id} to={"/ad/" + id}>
             <Button variant="success">Read more</Button>
           </Link> 
         </Card.Body>

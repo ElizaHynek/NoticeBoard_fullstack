@@ -11,6 +11,8 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Logout from './components/pages/Logout';
 import SingleAd from './components/features/SingleAd';
+import RemoveAd from './components/pages/RemoveAd';
+
 
 function App() {
   return (
@@ -19,10 +21,11 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/ads/:id" element={<SingleAd />} />
-          <Route path="/ads/add" element={<AddAd />} />
-          <Route path="/ads/edit/:id" element={<EditAd />} />
-          <Route path="/ads/search/:searchPhrase" element={<SearchResults />} />
+          <Route path="/ad/:id" element={<SingleAd />} />
+          <Route path="/ad/add" element={<AddAd />} />
+          <Route path="/ad/edit/:id" element={<EditAd />} />
+          <Route path="/ad/remove/:id" element={<RemoveAd />} />
+          <Route path="/ad/search/:searchPhrase" element={<SearchResults />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Logout />} />

@@ -8,7 +8,7 @@ const Home = props => {
     <div>
       <div className="d-flex justify-content-between">
         <h1>All posts</h1>
-        <Link key={props.id} to={"/ads/add"}>
+        <Link key={props.id} to={"/ad/add"}>
           <Button variant="success">Add advert</Button>
         </Link> 
       </div>

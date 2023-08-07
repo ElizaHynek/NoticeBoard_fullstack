@@ -30,7 +30,7 @@ const SingleAd = () => {
         <div className="d-flex justify-content-between">
           <h2>{adData.title}</h2>
           <div>
-            <Link key={id} to={"/ads/edit/" + id}>
+            <Link key={id} to={"/ad/edit/" + id}>
               <Button variant="outline-success m-1">Edit ad</Button>
             </Link>
             <Button onClick={handleShow} variant="outline-danger m-1">Delete</Button>
