@@ -9,6 +9,9 @@ const connectToDB = require('./db');
 const app = express();
 app.use(session({ secret: 'anything' }));
 
+app.listen(process.env.PORT || 8000, () => {
+  console.log('Server is running on port: 8000');
+});
 
 connectToDB();
 
@@ -50,7 +53,3 @@ app.use('/', (req, res) => {
   res.status(404).render('notFound');
 });
 
-
-const server = app.listen('8000', () => {
-  console.log('Server is running on port: 8000');
-});

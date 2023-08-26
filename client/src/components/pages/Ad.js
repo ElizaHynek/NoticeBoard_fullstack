@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { IMAGES_URL } from "../../config";
 
 
-const Ad = ({ title, location, image, id }) => {
+const Ad = ({ title, location, image, _id }) => {
 
   return (
     <Col className="py-4 col-12 col-sm-6 col-lg-4">
@@ -13,7 +13,7 @@ const Ad = ({ title, location, image, id }) => {
           <Card.Text>
             <p><b>Location: </b>{location}</p>
           </Card.Text>
-          <Link key={id} to={"/ad/" + id}>
+          <Link to={"/ad/" + _id}>
             <Button variant="success">Read more</Button>
           </Link> 
         </Card.Body>

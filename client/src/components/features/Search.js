@@ -13,7 +13,7 @@ const Search = () => {
     <div className="d-flex justify-content-between">
       <div>
       <InputGroup className="mb-3">
-        <Form.Control
+        <Form.Control type="text"
           placeholder="search phrase..."
         />
         <Link to="/ad/search/:searchPhrase">

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../config";
 import { getAllUsers } from "../../redux/usersRedux";
-import { editAd } from "../../redux/adsRedux";
+import { updateAds } from "../../redux/adsRedux";
 
 const Home = props => {
 
@@ -27,7 +27,7 @@ const Home = props => {
       .then((res) => {
         if (res.status === 200) {
           return res.json().then((ads) => {
-            dispatch(editAd(ads));
+            dispatch(updateAds(ads));
             setPending(false);
           });
         }
@@ -41,7 +41,7 @@ const Home = props => {
       .then((res) => {
         if (res.status === 200) {
           return res.json().then((data) => {
-            dispatch(getAllUsers(data));
+            dispatch(updateAds(data._id));
           });
         }
       });
