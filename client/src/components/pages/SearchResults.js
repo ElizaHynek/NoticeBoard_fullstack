@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-expressions */
 import { useEffect, useState } from 'react';
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { API_URL } from '../../config';
 import { useParams } from 'react-router-dom';
-import Search from '../features/Search';
 import Ad from './Ad';
+import Spinner from '../common/Spinner';
 //import { getAllAds } from "../../redux/adsRedux";
 //import { useSelector } from 'react-redux';
 
@@ -15,35 +15,36 @@ const SearchResults = () => {
 
   const searchId = useParams();
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-	const options = {
-		method: 'GET',
-	};
+
 
   const fetchData = async () => {
-    await fetch(`${API_URL}/ads/search/${searchId}`, options)
+    await fetch(`${API_URL}/ads/search/${searchId}`)
       .then((response) => response.json())
       .then((res) => {
         setData(res);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
     fetchData();
-  }, [searchId]);
+  });
 
   return (
-    <>
-      <Search />
-        <Row xs={1} md={3} className="g-3 ">
-          {data.map((ad) => (
-            <Col key={ad.id}>
-              <Ad {...ad} />
-            </Col>
-          ))}
-        </Row>
-
-    </>
+    <div>
+      {data.length === 0 && <h3>Something went wrong. Try again</h3>}
+      {loading && <Spinner />}
+      {!loading && (
+        <div>
+          <h2>Searched adds</h2>
+          <Row className="justify-content-between">
+            {data.map(ad => <Ad key={ad._id} {...ad} />)}  
+          </Row>
+        </div>
+      )}
+    </div>
   );
 };
 

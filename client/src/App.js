@@ -6,7 +6,7 @@ import Home from './components/pages/Home';
 import NotFound from './components/pages/NotFound';
 import AddAd from './components/pages/AddAd';
 import EditAd from './components/pages/EditAd';
-import SearchResults from './components/features/Search'; 
+import SearchResults from './components/pages/SearchResults';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Logout from './components/pages/Logout';

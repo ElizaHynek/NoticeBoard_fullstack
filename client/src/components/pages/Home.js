@@ -1,6 +1,6 @@
 import AllAds from "../features/AllAds";
 import Spinner from "../common/Spinner";
-import SearchResults from "../features/Search";
+import Search from "../features/Search";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -54,7 +54,7 @@ const Home = props => {
 
       {!pending && (
       <div className="d-flex justify-content-between">
-        <SearchResults />
+        <Search />
         <Link key={props.id} to={"/ad/add"}>
           <Button variant="success">Add advert</Button>
         </Link> 
