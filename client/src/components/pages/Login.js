@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { API_URL } from '../../config';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/usersRedux';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -10,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(null); // null, 'loading', 'success', 'serverError', 'clientError'
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const Login = () => {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({login, password})
     };
 
@@ -27,7 +30,8 @@ const Login = () => {
     .then(res => {
       if (res.status === 200) {
         setStatus('success');
-        dispatch(logIn({ login }))
+        dispatch(logIn({ login }));
+        navigate('/')
       } 
       else if (res.status === 400) {
         setStatus('clientError');

@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+import { API_URL } from '../config';
 
 //selectors
 export const getAllAds = ({ ads }) => ads;
@@ -18,6 +19,18 @@ export const addAd = payload => ({ type: ADD_AD, payload });
 export const editAd = payload => ({ type: EDIT_AD, payload });
 export const searchAd = (payload) => ({ type: SEARCH_ADS, payload: { payload } });
 export const updateAds = (payload) => ({ type: UPDATE_ADS, payload });
+
+export const fetchAds = () => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${API_URL}/ads`);
+  
+      dispatch(updateAds(response.data));
+    } catch (error) {
+      console.log(error); 
+    }
+  };
+};
 
 const adsReducer = (statePart = [], action) => {
   switch (action.type) {

@@ -38,7 +38,7 @@ exports.getSearched = async (req, res) => {
 exports.add = async (req, res) => {
   try {
 
-    const { title, content, publishDate, price, location, user } = req.body;
+    const { title, content, publishDate, price, location } = req.body;
 
     const fileType = req.file ? await getImageFileType(req.file) : 'unknown';
 		if (
@@ -47,11 +47,10 @@ exports.add = async (req, res) => {
       publishDate && typeof publishDate === 'string' && 
       price && typeof price === 'string' &&
       location && typeof location === 'string' && 
-      user && typeof user === 'string' && 
       req.file && ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'].includes(fileType) 
       )
     {
-      const newAd = await Ads.create({ title: title, content: content, publishDate: new Date(), price: price, location: location, user: user, image: req.file.filename });
+      const newAd = await Ads.create({ title: title, content: content, publishDate: publishDate, price: price, location: location, user: req.session.login._id, image: req.file.filename });
       res.status(201).send({ message: 'New ad added' })
     } else {
       if (req.file) {
@@ -66,7 +65,7 @@ exports.add = async (req, res) => {
 };
 
 exports.edit = async (req, res) => {
-  const { title, content, publishDate, price, location, user } = req.body;
+  const { title, content, publishDate, price, location } = req.body;
 
   try {
 
@@ -74,7 +73,7 @@ exports.edit = async (req, res) => {
     const advert = await Ads.findById(req.params.id);
 
     if(advert){
-      await Ads.updateOne({ _id: req.params.id }, { $set: { title: title, content: content, publishDate: publishDate, price: price, location: location, user: user, image: req.file.filename }});
+      await Ads.updateOne({ _id: req.params.id }, { $set: { title: title, content: content, publishDate: publishDate, price: price, location: location, image: req.file.filename }});
       res.status(201).send({ message: 'Ad updated' });
     }
     else {
