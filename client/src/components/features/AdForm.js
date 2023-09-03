@@ -6,8 +6,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { API_URL } from "../../config";
 import Spinner from '../common/Spinner';
+import { useNavigate } from "react-router-dom";
 
 const AdForm = props => {
+
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState(props.title || '');
   const [content, setContent] = useState(props.content || '');
@@ -19,6 +22,16 @@ const AdForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    const options = {
+      method: 'GET',
+      credentials: 'include',
+    };
+
+    fetch(`${API_URL}/auth/user`, options)
+      .then((res) => {
+      console.log('logged in?', res);
+    });
 
     const fd = new FormData();
     fd.append('title', title);
@@ -35,10 +48,12 @@ const AdForm = props => {
     };
 
     setStatus('loading');
+
     fetch(`${API_URL}/ads`, option)
     .then(res => {
       if(res.status === 201){
         setStatus('success');
+        navigate("/");
       } else if(res.status === 400){
         setStatus('clientError');
       } else if(res.status === 409){
@@ -61,7 +76,7 @@ const AdForm = props => {
       {status === "success" &&(
         <Alert variant='success'>
           <Alert.Heading>Success!</Alert.Heading>
-          <p>You have been successful registered</p>
+          <p>You have been added the advert</p>
         </Alert>
       )}
 

@@ -21,7 +21,7 @@ const AdFormEdit = () => {
   if(!adData) return <Navigate to="/" />
     return (
       <div>
-        <AdForm actionText="Edit ad" action={handleEdit} author={adData.author} publishedDate={adData.publishedDate} title={adData.title} shortDescription={adData.shortDescription} content={adData.content} category={adData.category} />
+        <AdForm actionText="Edit ad" action={handleEdit} title={adData.title} content={adData.content} price={adData.price} publishDate={adData.publishDate} location={adData.location} login={adData.user.login} />
       </div>
   );
 };

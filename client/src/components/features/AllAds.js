@@ -10,7 +10,7 @@ const AllAds = () => {
 
 	return (
     <Row className="justify-content-between">
-        {ads.map(ad => <Ad key={ad.id} {...ad} />)}  
+        {ads.map(ad => <Ad key={ad._id} {...ad} />)}  
     </Row>  
 	);
 };
