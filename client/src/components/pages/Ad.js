@@ -8,7 +8,7 @@ const Ad = ({ title, location, image, _id }) => {
   return (
     <Col className="py-4 col-12 col-sm-6 col-lg-4">
       <Card>
-        <Card.Body >
+        <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text>
             <p><b>Location: </b>{location}</p>

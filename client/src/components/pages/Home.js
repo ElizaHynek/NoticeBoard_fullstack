@@ -17,13 +17,9 @@ const Home = props => {
 
   useEffect(() => {
 
-    const options = {
-      method: 'GET',
-    };
-
     const handleUpdate = () => {
       setPending(true);
-      fetch(`${API_URL}/ads`, options)
+      fetch(`${API_URL}/ads`)
       .then((res) => {
         if (res.status === 200) {
           return res.json().then((ads) => {
@@ -37,7 +33,7 @@ const Home = props => {
     handleUpdate();
   
     if (user) {
-      fetch(`${API_URL}/auth/user/${user.login}`, options)
+      fetch(`${API_URL}/auth/user/${user.login}`)
       .then((res) => {
         if (res.status === 200) {
           return res.json().then((data) => {
