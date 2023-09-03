@@ -8,7 +8,7 @@ import { API_URL } from "../../config";
 import Spinner from '../common/Spinner';
 import { useNavigate } from "react-router-dom";
 
-const AdForm = props => {
+const AddForm = props => {
 
   const navigate = useNavigate();
 
@@ -22,16 +22,6 @@ const AdForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const options = {
-      method: 'GET',
-      credentials: 'include',
-    };
-
-    fetch(`${API_URL}/auth/user`, options)
-      .then((res) => {
-      console.log('logged in?', res);
-    });
 
     const fd = new FormData();
     fd.append('title', title);
@@ -56,7 +46,7 @@ const AdForm = props => {
         navigate("/");
       } else if(res.status === 400){
         setStatus('clientError');
-      } else if(res.status === 409){
+      } else if(res.status === 401){
         setStatus('loginError');
       } else{
         setStatus('serverError');
@@ -96,8 +86,8 @@ const AdForm = props => {
 
       {status === "loginError" &&( 
         <Alert variant='warning'>
-          <Alert.Heading>Login already in use</Alert.Heading>
-          <p>You have to use other login</p>
+          <Alert.Heading>You must be logged</Alert.Heading>
+          <p>You have login first</p>
         </Alert>
       )}
 
@@ -150,4 +140,4 @@ const AdForm = props => {
   );
 };
 
-export default AdForm;
+export default AddForm;
