@@ -14,7 +14,10 @@ const SingleAd = () => {
 
   const { id } = useParams();
   const adData = useSelector(state => getAdById(state, id));
+  console.log(adData)
+  
   const user = useSelector(getAllUsers);
+  console.log(user)
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
@@ -38,8 +41,10 @@ const SingleAd = () => {
         handleClose();
         navigate('/');
       });
-
+      
   };
+
+
 
   if(!adData) return <Navigate to="/" />
   return (

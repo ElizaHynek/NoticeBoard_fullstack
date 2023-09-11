@@ -1,6 +1,5 @@
 import AdFormEdit from "../features/AdFormEdit";
 
-
 const EditAd = () => {
 
     return (
