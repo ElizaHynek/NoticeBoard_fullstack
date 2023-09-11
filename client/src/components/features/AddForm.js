@@ -87,7 +87,7 @@ const AddForm = props => {
       {status === "loginError" &&( 
         <Alert variant='warning'>
           <Alert.Heading>You must be logged</Alert.Heading>
-          <p>You have login first</p>
+          <p>You have to login first</p>
         </Alert>
       )}
 

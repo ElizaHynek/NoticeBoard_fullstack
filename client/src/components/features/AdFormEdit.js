@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAdById, editAd } from '../../redux/adsRedux';
+import { getAdById, updateAds } from '../../redux/adsRedux';
 import EditForm from "./EditForm";
 import { Navigate } from "react-router-dom";
 import { useState } from 'react';
@@ -37,11 +37,13 @@ const AdFormEdit = () => {
       .then((res) => {
         if (res.status === 201) {
           setStatus('succes')
-          dispatch(editAd({ ...adData, id }));
+          dispatch(updateAds({ ...adData, id }));
           setTimeout(() => navigate('/'), 3000);
-        } else if (res.status === 400) {
+        } else if(res.status === 400){
           setStatus('clientError');
-        } else {
+        } else if(res.status === 401){
+          setStatus('loginError');
+        } else{
           setStatus('serverError');
         }
       })
