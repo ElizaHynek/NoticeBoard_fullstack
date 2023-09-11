@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAdById, editAd, fetchAds } from '../../redux/adsRedux';
+import { getAdById, editAd } from '../../redux/adsRedux';
 import EditForm from "./EditForm";
 import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useState } from 'react';
 import { API_URL } from "../../config";
 import { Alert } from 'react-bootstrap';
@@ -14,10 +13,6 @@ const AdFormEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAds());
-  }, [dispatch]);
 
   const adData = useSelector((state) => getAdById(state, id));
   console.log(adData)
@@ -40,10 +35,10 @@ const AdFormEdit = () => {
 
     fetch(`${API_URL}/ads/${id}`, options)
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           setStatus('succes')
           dispatch(editAd({ ...adData, id }));
-          setTimeout(() => navigate('/'), 2000);
+          setTimeout(() => navigate('/'), 3000);
         } else if (res.status === 400) {
           setStatus('clientError');
         } else {
